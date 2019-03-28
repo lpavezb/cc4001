@@ -35,17 +35,18 @@ In the second sample the obtained sequence is [1, 2, 1, 3, 1, 2, 1,�
 using namespace std;
 
 int main(){
-    int n, k;
+    int n;
+    long long k;
     cin >> n >> k;
-    int mid, start, end, res;
+    long long mid, start, end, res;
     res = n;
-    start = 0;
-    end = pow(2,n);
+    start = 1;
+    end = pow(2.0,n) - 1;
 
     while (start < end){
-        mid = start + (end - start)/2;
+        mid = (start + end)/2;
         if(k == mid)
-        	break;
+            break;
         if(k < mid)
             end = mid;
         else
