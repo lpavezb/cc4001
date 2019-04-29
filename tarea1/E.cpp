@@ -10,7 +10,7 @@ Then t test descriptions follow. Each test consist of a single number a.
 
 Constraints
 1 <= t <= 100000
-2 <= a <= 106
+2 <= a <= 1000000
 
 Output
 For each test print the least positive value of n for which f(n) > g(n).
@@ -30,19 +30,29 @@ Output:
 
 #include <iostream>
 #include <cmath>
+#include <vector>
 using namespace std;
 
 int main(){
     int n;
     cin >> n;
-    int a, mid, start, end;
+    int mid, start, end;
+    double a;
+    vector<double> logfact;
+    logfact.push_back(0);
+    for (int i = 1; i <= 100000; ++i)
+        logfact.push_back(logfact[i-1] + log((double)i));
     for (int i = 0; i < n; ++i){
+        cin >> a;
         start = 1;
         end = 100000;
-        cin >> a;
         while (start < end){
             mid = start + (end - start)/2;
-            if(mid*log(mid)*(5.0/6) > mid*log(a))
+            if(logfact[mid] == mid*log(a)){
+                cout << mid + 1 << endl;
+                return 0;
+            }
+            if(logfact[mid] > mid*log(a))
                 end = mid;
             else
                 start = mid + 1;
